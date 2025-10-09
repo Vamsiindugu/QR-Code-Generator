@@ -59,7 +59,7 @@ const LandingSection = () => {
           className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-10 max-w-3xl mx-auto space-y-4 text-left py-8"
           variants={itemVariants}
         >
-          <p>🚀 Share websites, Wi-Fi access, contact info, or secret messages - all in one scan.</p>
+          <p>🚀 Share websites, Wi-Fi access, contact info, <span className="font-extrabold">secret messages</span> - all in one scan.</p>
           <p>⚡ Stop typing out long links. Start generating beautiful, functional QR codes instantly.</p>
           <p>🔒 Your content stays yours. No tracking, just seamless sharing.</p>
           <p>💰 High-quality results without the price tag, all for free and unlimited usage.</p>
