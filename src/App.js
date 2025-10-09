@@ -1,5 +1,3 @@
-// src/App.js
-
 import React, { Suspense, lazy } from 'react';
 import { ThemeProvider, useTheme } from './ThemeContext';
 import LandingSection from './LandingSection';
