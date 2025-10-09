@@ -1,4 +1,4 @@
-# QR-Code Generator
+# QR-Code Generator - [![QR-Code Generator Website](https://img.shields.io/badge/QR_Code_Generator-%23000000.svg?style=for-the-badge&logo=firefox&logoColor=#FF7139)](https://wishful-qr-generator.vercel.app/)
 
 ![React Version](https://img.shields.io/badge/React-18.3.1-blue.svg)
 ![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-3.4.18-06B6D4.svg)
