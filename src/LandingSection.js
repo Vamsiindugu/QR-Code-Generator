@@ -6,31 +6,33 @@ import { motion } from 'framer-motion';
 const LandingSection = () => {
 
   const scrollToGenerator = () => {
-    // Standard smooth scroll to the #generator ID (smooth behavior defined in index.css)
-    document.getElementById('generator').scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('generator')?.scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start'
+    });
   };
 
-  // Framer Motion variants for subtle entry animation
+  // Optimized animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2, // Stagger children animations
-        duration: 0.8
+        staggerChildren: 0.15,
+        duration: 0.6,
+        ease: "easeOut"
       }
     }
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 30, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 12
+        duration: 0.6,
+        ease: "easeOut"
       }
     }
   };
@@ -38,7 +40,7 @@ const LandingSection = () => {
   return (
     <motion.section
       id="landing"
-      className="flex flex-col items-center justify-center h-screen bg-white dark:bg-gray-900 transition-colors duration-500 text-center p-6"
+      className="flex flex-col items-center justify-center min-h-screen bg-white dark:bg-[#010409] transition-colors duration-500 text-center p-6"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
@@ -66,7 +68,7 @@ const LandingSection = () => {
         {/* CTA Button */}
         <motion.button
           onClick={scrollToGenerator}
-          className="px-10 py-4 text-lg font-semibold rounded-full bg-indigo-600 text-white shadow-xl hover:bg-indigo-700 transition duration-300 transform hover:scale-105"
+          className="px-10 py-4 text-lg font-semibold rounded-full bg-indigo-600 text-white shadow-xl hover:bg-indigo-700 transition-all duration-300 transform hover:scale-105"
           variants={itemVariants}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}

@@ -3,11 +3,41 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Set smooth scroll behavior on the root element */
+/* Smooth scroll behavior with better performance */
 html {
   scroll-behavior: smooth;
+  /* Prevent white flashes during scroll */
+  background-color: #ffffff;
 }
 
-/* Optional: Import fonts for a real project
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Space+Mono:wght@400;700&display=swap'); 
-*/
+/* Dark mode background fix */
+html.dark {
+  background-color: #010409; /* dark-mode-bg */
+}
+
+/* Ensure body has no gaps */
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  background-color: inherit;
+}
+
+/* Smooth transitions for all color changes */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+/* Remove transition from animations to prevent conflicts */
+[class*="motion-"] {
+  transition: none;
+}
+
+/* Improve scroll performance */
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    scroll-behavior: smooth;
+  }
+}
