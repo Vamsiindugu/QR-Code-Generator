@@ -49,15 +49,15 @@ const LandingSection = () => {
       <div className="max-w-4xl">
         {/* Headline */}
         <motion.h1
-          className="text-6xl md:text-8xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-6"
+          className="text-7xl md:text-8xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-6"
           variants={itemVariants}
         >
-          Say it with your <span className="text-indigo-600 dark:text-[#A100FF]">QR.</span>
+          Say it with your <br /><span className="text-indigo-600 dark:text-[#A100FF]">QR.</span>
         </motion.h1>
 
         {/* Description */}
         <motion.div
-          className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-10 max-w-3xl mx-auto space-y-4 text-left py-8"
+          className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-10 max-w-4xl mx-auto space-y-4 text-left py-8"
           variants={itemVariants}
         >
           <p>🚀 Share websites, Wi-Fi access, contact info, <span className="font-extrabold">secret messages</span> - all in one scan.</p>
