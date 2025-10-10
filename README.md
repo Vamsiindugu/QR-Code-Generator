@@ -189,8 +189,10 @@ npm start
 | `npm run analyze` | Analyzes bundle size with source-map-explorer |
 
 ---
+
 ## 📂 Project Structure
-```
+
+```bash
 vamsiindugu-qr-code-generator/
 ├── public/
 │   ├── index.html          # HTML template
@@ -211,6 +213,7 @@ vamsiindugu-qr-code-generator/
 ├── postcss.config.js       # PostCSS configuration
 └── package.json            # Dependencies and scripts
 ```
+
 ---
 
 ## 🎯 Usage Guide
@@ -247,48 +250,48 @@ Contributions are **welcome** and **appreciated**! 🙌
 
 ### How to Contribute
 
-1.  **Fork the repository**
-2.  **Create a feature branch**
+1.**Fork the repository**
 
-    ```bash
-    git checkout -b feature/amazing-new-feature
-    ```
+2.**Create a feature branch**
 
-3.  **Commit your changes**
+```bash
+       git checkout -b feature/amazing-new-feature
+```
 
-    ```bash
+3.**Commit your changes**
+
+```bash
     git commit -m 'Add amazing new feature'
-    ```
+```
 
-4.  **Push to your branch**
+4.**Push to your branch**
 
-    ```bash
+```bash
     git push origin feature/amazing-new-feature
-    ```
+```
 
-5.  **Open a Pull Request**
+5.**Open a Pull Request**
 
 ## Contribution Ideas
 
-* 🎨 Add **color customization** for QR codes
-* 📊 Implement **SVG/PNG export options**
-* 🌍 Add **internationalization (i18n) support**
-* ♿ Enhance **accessibility** with screen reader testing
-* 🧪 Write **unit tests** for utility functions
+*🎨 Add **color customization** for QR codes
+*📊 Implement **SVG/PNG export options**
+*🌍 Add **internationalization (i18n) support**
+*♿ Enhance **accessibility** with screen reader testing
+*🧪 Write **unit tests** for utility functions
 
 ---
 
 ## 📧 Contact
 
-**Vamsi Indugu**
+### Vamsi Indugu
 
 - 💌 Email: [vamsiindugu@gmail.com](mailto:vamsiindugu@gmail.com)
 - 👩🏻‍💻 Portfolio: [vamsiindugu.vercel.app](https://vamsiindugu.vercel.app/)
 - 🐱 GitHub: [@Vamsiindugu](https://github.com/Vamsiindugu/)
 - 💼 LinkedIn: [vamsi-indugu](https://www.linkedin.com/in/vamsi-indugu/)
+
 ---
 
-<div align="center">
 © 2025 Vamsi Indugu. All rights reserved.
 Made with ❤️ and React
-</div>

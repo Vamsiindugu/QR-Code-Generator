@@ -2,11 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const SubmitButton = ({ status }) => {
-  const isSent = status.includes('✅');
+  const isSent = status === 'success';
+  const isSending = status === 'sending';
 
   return (
     <StyledWrapper>
-      <button type="submit" className={`button ${isSent ? 'is-sent' : ''}`}>
+      <button type="submit" disabled={isSending} className={`button ${isSent ? 'is-sent' : ''}`}>
         <div className="outline" />
         <div className="state state--default">
           <div className="icon">

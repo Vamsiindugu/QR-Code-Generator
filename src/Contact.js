@@ -5,14 +5,21 @@ import { motion } from 'framer-motion';
 import SubmitButton from './SubmitButton';
 
 const Contact = () => {
-  const [result, setResult] = useState("");
+  const [formState, setFormState] = useState({ status: 'idle', message: '' });
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    setResult("Sending....");
-    const formData = new FormData(event.target);
 
-    formData.append("access_key", "a98c25de-1969-496e-ae61-580fe57dca93");
+    const accessKey = process.env.REACT_APP_WEB3FORMS_ACCESS_KEY;
+
+    if (!accessKey || accessKey === "YOUR_ACCESS_KEY_HERE") {
+      setFormState({ status: 'error', message: "❌ Invalid API Key. Please configure your .env file." });
+      return;
+    }
+
+    setFormState({ status: 'sending', message: 'Sending....' });
+    const formData = new FormData(event.target);
+    formData.append("access_key", accessKey);
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -23,16 +30,16 @@ const Contact = () => {
       const data = await response.json();
 
       if (data.success) {
-        setResult("✅ Message sent successfully!");
+        setFormState({ status: 'success', message: "✅ Message sent successfully!" });
         event.target.reset();
-        setTimeout(() => setResult(""), 5000);
+        setTimeout(() => setFormState({ status: 'idle', message: '' }), 5000);
       } else {
         console.log("Error", data);
-        setResult("❌ " + data.message);
+        setFormState({ status: 'error', message: "❌ " + data.message });
       }
     } catch (error) {
       console.error("Error:", error);
-      setResult("❌ Failed to send message. Please try again.");
+      setFormState({ status: 'error', message: "❌ Failed to send message. Please try again." });
     }
   };
 
@@ -124,15 +131,15 @@ const Contact = () => {
             className='w-full p-4 outline-none border-2 border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-[#030712] dark:text-white resize-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-300'
           />
 
-          <SubmitButton status={result} />
+          <SubmitButton status={formState.status} />
 
-          {result && (
+          {formState.message && (
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               className='text-center mt-4 text-lg font-medium text-gray-700 dark:text-gray-300'
             >
-              {result}
+              {formState.message}
             </motion.p>
           )}
         </motion.form>
