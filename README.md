@@ -75,7 +75,9 @@ A production-ready React application designed with modularity, performance, and 
 1. localStorage (persisted user preference)
 2. System preference (window.matchMedia)
 3. Default to 'light'
+
 ```
+
 - ✅ Seamless transitions with `transition-colors duration-300`
 
 - ✅ Persists across sessions via `localStorage`
@@ -95,10 +97,13 @@ A production-ready React application designed with modularity, performance, and 
 // Example: Debounce prevents QR regeneration on every keystroke
 const debouncedInputText = useDebounce(inputText, 300);
 ```
+
 ### 🧩 Component Architecture
 
 **Separation of Concerns**: Each component has a single, well-defined responsibility.
-```
+
+```bash
+
 App.js
 ├── ThemeProvider (Context)
 ├── ThemeToggle (UI Component)
@@ -106,16 +111,16 @@ App.js
 ├── GeneratorSection (Lazy Loaded)
 │   ├── QRCode (react-qr-code)
 │   ├── Button (Download)
-│   └── ShareButton (Web Share API)
 └── Footer (Contact & Links)
 ```
+
 #### 🎯 Component Highlights
 
 - **`ThemeToggle`**: Fixed-position button with smooth icon transitions
 - **`LandingSection`**: Framer Motion staggered animations for hero content
 - **`GeneratorSection`**: Two-column layout (input + output) with real-time QR preview
 - **`Button`**: Animated sliding text effect on hover
-- **`ShareButton`**: Gradient border with glassmorphism effect
+
 ---
 
 ## 🛠️ Tech Stack
@@ -139,6 +144,7 @@ App.js
 - **React Scripts** (5.0.1): Zero-config build tooling
 - **ESLint**: React Hooks linting with exhaustive-deps rule
 - **Source Map Explorer**: Bundle size analysis
+
 ---
 
 ## 🚀 Getting Started
@@ -163,6 +169,7 @@ npm install
 # Or with yarn
 yarn install
 ```
+
 ### ▶️ Running the Application
 
 ```bash
@@ -171,6 +178,7 @@ npm start
 
 # The app will open at http://localhost:3000
 ```
+
 **Available Scripts**:
 
 | Command | Description |
@@ -194,7 +202,6 @@ vamsiindugu-qr-code-generator/
 │   ├── LandingSection.js   # Hero section with CTA
 │   ├── GeneratorSection.js # QR generation + download/share logic
 │   ├── Button.js           # Reusable animated button component
-│   ├── ShareButton.js      # Web Share API button
 │   ├── Footer.js           # Footer with contact links
 │   ├── useDebounce.js      # Custom debounce hook
 │   ├── utils.js            # Input sanitization helpers

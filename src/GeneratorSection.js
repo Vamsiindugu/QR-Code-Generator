@@ -7,7 +7,7 @@ import QRCode from 'react-qr-code';
 import { useDebounce } from './useDebounce';
 import { sanitizeForQRCode } from './utils';
 import Button from './Button';
-import ShareButton from './ShareButton';
+import ShareAnimatedButton from './ShareAnimatedButton';
 
 const GeneratorSection = () => {
   const { isDark } = useTheme();
@@ -226,10 +226,12 @@ const GeneratorSection = () => {
                 Download
             </Button>
 
-            <ShareButton 
+            <ShareAnimatedButton 
                 onClick={handleShare} 
                 className="flex-1 max-w-[150px]"
-            />
+            >
+                Share
+            </ShareAnimatedButton>
           </div>
         </div>
 

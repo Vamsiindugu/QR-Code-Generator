@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import AnimatedButton from './AnimatedButton';
 
 const LandingSection = () => {
 
@@ -51,7 +52,7 @@ const LandingSection = () => {
           className="text-6xl md:text-8xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-6"
           variants={itemVariants}
         >
-          Say it with your <span className="text-indigo-600 dark:text-indigo-400">QR.</span>
+          Say it with your <span className="text-indigo-600 dark:text-[#A100FF]">QR.</span>
         </motion.h1>
 
         {/* Description */}
@@ -66,15 +67,9 @@ const LandingSection = () => {
         </motion.div>
 
         {/* CTA Button */}
-        <motion.button
-          onClick={scrollToGenerator}
-          className="px-10 py-4 text-lg font-semibold rounded-full bg-indigo-600 text-white shadow-xl hover:bg-indigo-700 transition-all duration-300 transform hover:scale-105"
-          variants={itemVariants}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Start Generating &rarr;
-        </motion.button>
+        <motion.div variants={itemVariants}>
+          <AnimatedButton onClick={scrollToGenerator} />
+        </motion.div>
       </div>
     </motion.section>
   );

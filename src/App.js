@@ -6,6 +6,7 @@ import LandingSection from './LandingSection';
 import Footer from './Footer';
 import Contact from './Contact';
 import { Sun, Moon } from 'lucide-react'; 
+import StaticBackToTop from './StaticBackToTop';
 
 const GeneratorSection = lazy(() => import('./GeneratorSection'));
 
@@ -50,6 +51,7 @@ const AppContent = () => {
         </Suspense>
         <Contact />
       </main>
+      <StaticBackToTop />
       <Footer />
     </div>
   );
