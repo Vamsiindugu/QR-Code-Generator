@@ -8,7 +8,7 @@ const getSvgData = (qrRef) => {
 const drawCanvas = (svgData, size = 512) => {
   return new Promise((resolve, reject) => {
     const canvas = document.createElement('canvas');
-    const padding = { top: 0, right: 32, bottom: 32, left: 0 };
+    const padding = { top: 32, right: 32, bottom: 32, left: 32 };
     const borderRadius = 24;
 
     canvas.width = size;
