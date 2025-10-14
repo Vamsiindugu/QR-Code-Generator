@@ -31,7 +31,7 @@ A modern, lightning-fast **QR Code Generator** built with React that transforms 
 
 ## 📌 Project Overview
 
-This single-page application (SPA) empowers users to generate high-quality QR codes for any purpose — from sharing Wi-Fi credentials to distributing links, contact info, or secret messages — all without tracking, ads, or paywalls.
+This single-page application (SPA) empowers users to generate high-quality QR codes for any purpose from sharing Wi-Fi credentials to distributing links, contact info, or secret messages all without tracking, ads, or paywalls.
 
 🔍 **Objective**: Deliver a seamless, privacy-focused QR code generation experience with instant visual feedback and zero configuration.
 
@@ -255,7 +255,7 @@ Contributions are **welcome** and **appreciated**! 🙌
 2.**Create a feature branch**
 
 ```bash
-       git checkout -b feature/amazing-new-feature
+    git checkout -b feature/amazing-new-feature
 ```
 
 3.**Commit your changes**
@@ -274,11 +274,11 @@ Contributions are **welcome** and **appreciated**! 🙌
 
 ## Contribution Ideas
 
-*🎨 Add **color customization** for QR codes
-*📊 Implement **SVG/PNG export options**
-*🌍 Add **internationalization (i18n) support**
-*♿ Enhance **accessibility** with screen reader testing
-*🧪 Write **unit tests** for utility functions
+- 🎨 Add **color customization** for QR codes
+- 📊 Implement **SVG/PNG export options**
+- 🌍 Add **internationalization (i18n) support**
+- ♿ Enhance **accessibility** with screen reader testing
+- 🧪 Write **unit tests** for utility functions
 
 ---
 
