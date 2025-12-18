@@ -154,7 +154,7 @@ Clone and run this project locally in under 2 minutes.
 ### 📋 Prerequisites
 
 - **Node.js** 14.0+ (Recommended: 18.x LTS)
-- **npm** 6+ or **yarn** 1.22+
+- **npm** 7+ or **yarn** 1.22+
 
 ### 🔗 Installation
 
