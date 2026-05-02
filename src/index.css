@@ -1,18 +1,42 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
-  background-color: #fafafa;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --color-bg: #f5f4f0;
+  --color-surface: rgba(0,0,0,0.03);
+  --color-border: rgba(0,0,0,0.08);
+  --color-ink-primary: #0f0e1a;
+  --color-ink-secondary: #4b4965;
+  --color-ink-tertiary: #8a88a0;
+  --ambient-glow: rgba(124,106,247,0.10);
+  --card-bg: rgba(255,255,255,0.70);
+  --card-border: rgba(0,0,0,0.08);
+  --card-shadow: 0 1px 1px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.90);
+  --noise-opacity: 0.02;
 }
 
 html.dark {
-  background-color: #0a0a0a;
+  --color-bg: #0d0d12;
+  --color-surface: rgba(255,255,255,0.03);
+  --color-border: rgba(255,255,255,0.08);
+  --color-ink-primary: #f0eff5;
+  --color-ink-secondary: #7b7a8e;
+  --color-ink-tertiary: #4a4960;
+  --ambient-glow: rgba(124,106,247,0.15);
+  --card-bg: rgba(255,255,255,0.03);
+  --card-border: rgba(255,255,255,0.08);
+  --card-shadow: 0 1px 1px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
+  --noise-opacity: 0.025;
+}
+
+html {
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -22,19 +46,26 @@ body {
   background-color: inherit;
 }
 
-::selection {
-  background-color: rgba(224, 32, 32, 0.15);
-  color: inherit;
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: var(--noise-opacity);
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: overlay;
 }
 
-.dark ::selection {
-  background-color: rgba(224, 32, 32, 0.25);
+::selection {
+  background-color: rgba(124, 106, 247, 0.25);
+  color: inherit;
 }
 
 textarea,
 input,
 select {
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 textarea:focus,
@@ -43,54 +74,130 @@ select:focus {
   outline: none;
 }
 
-@keyframes fade-up {
-  0% {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* 1. Hero entrance */
+@keyframes hero-enter {
+  0%   { opacity: 0; transform: translateY(24px) scale(0.98); filter: blur(4px); }
+  60%  { opacity: 1; filter: blur(0); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 }
-
-.animate-fade-up {
+.animate-hero-enter {
   opacity: 0;
-  animation: fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: hero-enter 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-@keyframes qr-in {
-  0% {
+/* 2. Eyebrow label */
+@keyframes label-enter {
+  0%   { opacity: 0; transform: translateY(8px); letter-spacing: 0.4em; }
+  100% { opacity: 1; transform: translateY(0); letter-spacing: 0.25em; }
+}
+.animate-label-enter {
+  opacity: 0;
+  animation: label-enter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 3. QR code reveal — scan-in */
+@keyframes qr-reveal {
+  0%   {
     opacity: 0;
-    transform: scale(0.92);
+    clip-path: inset(0 0 100% 0);
+    filter: brightness(2) blur(2px);
+  }
+  40%  {
+    opacity: 1;
+    filter: brightness(1.3) blur(0);
   }
   100% {
     opacity: 1;
-    transform: scale(1);
+    clip-path: inset(0 0 0% 0);
+    filter: brightness(1) blur(0);
   }
 }
-
-.animate-qr-in {
-  animation: qr-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+.animate-qr-reveal {
+  animation: qr-reveal 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes spin-slow {
-  0% { transform: rotate(0deg); }
+/* 4. QR glow pulse */
+@keyframes qr-glow-pulse {
+  0%   { box-shadow: 0 0 0 rgba(124,106,247,0); }
+  40%  { box-shadow: 0 0 60px rgba(124,106,247,0.35), 0 0 120px rgba(124,106,247,0.15); }
+  100% { box-shadow: 0 0 20px rgba(124,106,247,0.08); }
+}
+.animate-qr-glow {
+  animation: qr-glow-pulse 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 5. Spinner */
+@keyframes spin-accent {
+  0%   { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-
-.animate-spin-slow {
-  animation: spin-slow 1.2s linear infinite;
+.animate-spin-accent {
+  animation: spin-accent 0.9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
-@keyframes copy-flash {
-  0% { opacity: 1; }
-  50% { opacity: 0.5; }
-  100% { opacity: 1; }
+/* 6. Section entrance */
+@keyframes section-enter {
+  0%   { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.animate-section-enter {
+  opacity: 0;
+  animation: section-enter 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-.copy-flash {
-  animation: copy-flash 0.3s ease;
+/* 7. Button success flash */
+@keyframes success-flash {
+  0%   { box-shadow: 0 0 0 0 rgba(124,106,247,0.5); }
+  50%  { box-shadow: 0 0 0 6px rgba(124,106,247,0); }
+  100% { box-shadow: 0 0 0 0 rgba(124,106,247,0); }
+}
+.animate-success {
+  animation: success-flash 0.5s ease-out;
+}
+
+/* 8. Capacity bar fill */
+@keyframes bar-grow {
+  from { width: 0%; }
+}
+.animate-bar-grow {
+  animation: bar-grow 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* 9. Floating dots */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.4; }
+  50%       { transform: translateY(-12px) rotate(180deg); opacity: 0.7; }
+}
+.animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
+.animate-float-mid  { animation: float-slow 4.5s ease-in-out infinite 1.5s; }
+.animate-float-fast { animation: float-slow 3.5s ease-in-out infinite 0.8s; }
+
+/* 10. Scroll-triggered reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Glass card focus-within for textarea wrapper */
+.glass-input-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.glass-input-card:focus-within {
+  border-color: rgba(124,106,247,0.30) !important;
+  box-shadow: 0 0 0 3px rgba(124,106,247,0.12), inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 16px rgba(0,0,0,0.3);
+}
+
+html:not(.dark) .glass-input-card:focus-within {
+  border-color: rgba(124,106,247,0.35) !important;
+  box-shadow: 0 0 0 3px rgba(124,106,247,0.10), inset 0 1px 0 rgba(255,255,255,0.90);
 }
 
 @media (prefers-reduced-motion: reduce) {

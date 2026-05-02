@@ -83,7 +83,8 @@ export const handleCopySvg = async (qrRef) => {
 
 export const handleShare = async (qrRef) => {
   if (!navigator.share) {
-    return handleCopySvg(qrRef);
+    const copied = await handleCopySvg(qrRef);
+    return copied ? 'copied' : false;
   }
 
   const svgData = getSvgData(qrRef);
@@ -99,9 +100,10 @@ export const handleShare = async (qrRef) => {
         files: [file],
         title: 'QR Code',
       });
-      return true;
+      return 'shared';
     }
-    return handleCopySvg(qrRef);
+    const copied = await handleCopySvg(qrRef);
+    return copied ? 'copied' : false;
   } catch (error) {
     if (error.name !== 'AbortError') {
       console.error('Error sharing:', error);
