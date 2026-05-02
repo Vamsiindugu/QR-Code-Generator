@@ -185,6 +185,9 @@ select:focus {
 }
 
 /* Glass card focus-within for textarea wrapper */
+.glass-input-card {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
 .glass-input-card:focus-within {
   border-color: rgba(124,106,247,0.30) !important;
   box-shadow: 0 0 0 3px rgba(124,106,247,0.12), inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 16px rgba(0,0,0,0.3);

@@ -20,7 +20,7 @@ const ThemeToggle = () => {
     <button
       onClick={handleToggle}
       aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
-      className="fixed top-5 right-5 z-50 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255,255,0.10)] backdrop-blur-md hover:bg-[rgba(255,255,255,0.10)] hover:border-[rgba(255,255,255,0.16)] transition-all duration-200 dark:bg-[rgba(255,255,255,0.06)] dark:border-[rgba(255,255,255,0.10)] dark:hover:bg-[rgba(255,255,255,0.10)] dark:hover:border-[rgba(255,255,255,0.16)] not-dark:bg-[rgba(0,0,0,0.04)] not-dark:border-[rgba(0,0,0,0.08)]"
+      className="fixed top-5 right-5 z-50 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[rgba(0,0,0,0.04)] dark:bg-[rgba(255,255,255,0.06)] border border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.10)] backdrop-blur-md hover:bg-[rgba(0,0,0,0.08)] dark:hover:bg-[rgba(255,255,255,0.10)] hover:border-[rgba(0,0,0,0.14)] dark:hover:border-[rgba(255,255,255,0.16)] transition-all duration-200"
     >
       <span
         className="transition-transform duration-300"

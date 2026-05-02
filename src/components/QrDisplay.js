@@ -63,9 +63,12 @@ const QrDisplay = ({ qrSvg, isLoading, qrRef }) => {
     temp.innerHTML = sanitized;
     const svg = temp.firstChild;
     if (svg) {
-      svg.setAttribute('width', '100%');
-      svg.setAttribute('height', '100%');
+      svg.style.maxWidth = '100%';
+      svg.style.maxHeight = '100%';
+      svg.style.width = 'auto';
+      svg.style.height = 'auto';
       svg.style.display = 'block';
+      svg.style.margin = '0 auto';
       containerRef.current.appendChild(svg);
     }
   }, [qrSvg]);
@@ -82,7 +85,7 @@ const QrDisplay = ({ qrSvg, isLoading, qrRef }) => {
           <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-accent animate-spin-accent" />
           <div className="absolute inset-[10px] rounded-full bg-accent opacity-60 animate-pulse" />
         </div>
-        <span className="text-[11px] font-medium tracking-[0.2em] uppercase text-ink-tertiary dark:text-ink-dark-tertiary">
+        <span className="text-[11px] font-medium tracking-[0.2em] uppercase text-ink-tertiary dark:text-ink-dark-secondary">
           Generating
         </span>
       </div>

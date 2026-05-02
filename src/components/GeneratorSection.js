@@ -38,6 +38,12 @@ const CapacityBar = ({ capacityInfo, barKey }) => {
 
 const GeneratorSection = () => {
   const { isDark } = useTheme();
+  const cardShineBg = isDark
+    ? 'linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 60%)'
+    : 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 60%)';
+  const cornerBg = isDark
+    ? 'linear-gradient(135deg, rgba(124,106,247,0.6) 0%, transparent 60%)'
+    : 'linear-gradient(135deg, rgba(124,106,247,0.3) 0%, transparent 60%)';
   const qrRef = useRef(null);
   const revealRef = useReveal(0.12);
   const [qrKey, setQrKey] = useState(0);
@@ -188,19 +194,19 @@ const GeneratorSection = () => {
               {/* The card */}
               <div
                 key={qrKey}
-                className={`relative aspect-square flex items-center justify-center glass-card rounded-2xl p-8 backdrop-blur-md hover:shadow-card-hover hover:border-[rgba(0,0,0,0.14)] dark:hover:border-[rgba(255,255,255,0.14)] transition-all duration-500 ease-out ${qrSvg ? 'animate-qr-glow' : ''}`}
+                className={`relative aspect-square flex items-center justify-center glass-card rounded-2xl p-8 backdrop-blur-md hover:shadow-card-hover hover:border-stroke-bright dark:hover:border-stroke-dark-bright transition-all duration-500 ease-out ${qrSvg ? 'animate-qr-glow' : ''}`}
               >
                 {/* Corner accent */}
                 <div
                   aria-hidden="true"
                   className="absolute top-0 right-0 w-16 h-16 rounded-tr-2xl rounded-bl-2xl overflow-hidden opacity-20"
-                  style={{ background: 'linear-gradient(135deg, rgba(124,106,247,0.6) 0%, transparent 60%)' }}
+                  style={{ background: cornerBg }}
                 />
                 {/* Card shine */}
                 <div
                   aria-hidden="true"
                   className="absolute inset-0 rounded-2xl pointer-events-none"
-                  style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 60%)' }}
+                  style={{ background: cardShineBg }}
                 />
                 <ErrorBoundary
                   fallback={

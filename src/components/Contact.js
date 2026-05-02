@@ -50,7 +50,7 @@ const Contact = () => {
       className="reveal w-full px-6 py-20 md:py-32"
     >
       <div className="max-w-5xl mx-auto">
-        <div className="h-px bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.08)] dark:via-[rgba(255,255,255,0.08)] via-[rgba(0,0,0,0.08)] to-transparent mb-20" />
+        <div className="h-px bg-gradient-to-r from-transparent via-stroke dark:via-stroke-dark to-transparent mb-20" />
       </div>
       <div className="max-w-lg mx-auto">
         <h2 className="text-xs font-medium tracking-[0.25em] uppercase text-accent mb-2 border-l-2 border-accent pl-3">
