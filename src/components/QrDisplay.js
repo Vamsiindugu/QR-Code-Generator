@@ -46,6 +46,13 @@ function sanitizeSvg(svgString) {
 
 const QrDisplay = ({ qrSvg, isLoading, qrRef }) => {
   const containerRef = useRef(null);
+  const revealKeyRef = useRef(0);
+
+  useEffect(() => {
+    if (qrSvg) {
+      revealKeyRef.current += 1;
+    }
+  }, [qrSvg]);
 
   useEffect(() => {
     if (!containerRef.current || !qrSvg) return;
@@ -54,19 +61,30 @@ const QrDisplay = ({ qrSvg, isLoading, qrRef }) => {
     containerRef.current.innerHTML = '';
     const temp = document.createElement('div');
     temp.innerHTML = sanitized;
-    while (temp.firstChild) {
-      containerRef.current.appendChild(temp.firstChild);
+    const svg = temp.firstChild;
+    if (svg) {
+      svg.setAttribute('width', '100%');
+      svg.setAttribute('height', '100%');
+      svg.style.display = 'block';
+      containerRef.current.appendChild(svg);
     }
   }, [qrSvg]);
 
   if (isLoading) {
     return (
       <div
-        className="w-full aspect-square flex items-center justify-center"
+        className="w-full h-full flex flex-col items-center justify-center gap-3"
         role="status"
         aria-label="Generating QR code"
       >
-        <div className="w-5 h-5 border-2 border-ink dark:border-ink-dark border-t-transparent rounded-full animate-spin-slow" />
+        <div className="relative w-8 h-8">
+          <div className="absolute inset-0 rounded-full border-2 border-[rgba(124,106,247,0.15)]" />
+          <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-accent animate-spin-accent" />
+          <div className="absolute inset-[10px] rounded-full bg-accent opacity-60 animate-pulse" />
+        </div>
+        <span className="text-[11px] font-medium tracking-[0.2em] uppercase text-ink-tertiary dark:text-ink-dark-tertiary">
+          Generating
+        </span>
       </div>
     );
   }
@@ -74,7 +92,7 @@ const QrDisplay = ({ qrSvg, isLoading, qrRef }) => {
   if (!qrSvg) {
     return (
       <div
-        className="w-full aspect-square flex items-center justify-center text-sm text-ink-tertiary dark:text-ink-dark-tertiary"
+        className="w-full h-full flex items-center justify-center text-sm text-ink-tertiary dark:text-ink-dark-tertiary"
         role="alert"
       >
         Could not generate QR code.
@@ -84,11 +102,12 @@ const QrDisplay = ({ qrSvg, isLoading, qrRef }) => {
 
   return (
     <div
+      key={revealKeyRef.current}
       ref={(el) => {
         containerRef.current = el;
         if (qrRef) qrRef.current = el;
       }}
-      className="w-full animate-qr-in"
+      className="w-full h-full flex items-center justify-center animate-qr-reveal"
       role="img"
       aria-label="Generated QR code"
     />
