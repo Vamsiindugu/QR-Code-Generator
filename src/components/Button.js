@@ -8,20 +8,26 @@ const Button = ({
   type = 'button',
   disabled = false,
   feedback = false,
+  feedbackLabel,
 }) => {
   const [feedbackActive, setFeedbackActive] = useState(false);
+  const [feedbackText, setFeedbackText] = useState('');
 
   const handleClick = useCallback(async (e) => {
     if (!onClick) return;
     const result = onClick(e);
     if (feedback && result !== undefined) {
-      const success = result instanceof Promise ? await result : result;
-      if (success) {
+      const value = result instanceof Promise ? await result : result;
+      if (value) {
+        const defaultLabel = variant === 'primary' ? 'Shared' : 'Copied';
+        const text = typeof value === 'string' ? value : (feedbackLabel || defaultLabel);
+        const label = text.charAt(0).toUpperCase() + text.slice(1) + ' ✓';
+        setFeedbackText(label);
         setFeedbackActive(true);
         setTimeout(() => setFeedbackActive(false), 1200);
       }
     }
-  }, [onClick, feedback]);
+  }, [onClick, feedback, feedbackLabel, variant]);
 
   const base =
     'inline-flex items-center justify-center gap-2 text-xs font-semibold transition-all duration-200 ease-out active:scale-[0.96] disabled:opacity-40 disabled:pointer-events-none';
@@ -44,7 +50,7 @@ const Button = ({
         feedbackActive ? 'animate-success' : ''
       } ${className}`}
     >
-      {feedbackActive ? (variant === 'primary' ? 'Shared ✓' : 'Copied ✓') : children}
+      {feedbackActive ? feedbackText : children}
     </button>
   );
 };
