@@ -1,6 +1,6 @@
 // src/ThemeContext.js
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useLayoutEffect } from 'react';
 
 const ThemeContext = createContext();
 
@@ -30,7 +30,7 @@ export const ThemeProvider = ({ children }) => {
   });
 
   // Effect to apply the theme to the DOM and persist it
-  useEffect(() => {
+  useLayoutEffect(() => {
     setRootThemeClass(theme);
     localStorage.setItem('theme', theme);
   }, [theme]);

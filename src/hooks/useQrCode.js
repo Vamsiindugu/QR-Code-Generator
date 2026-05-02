@@ -1,31 +1,37 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useDebounce } from './useDebounce';
-import { sanitizeForQRCode } from './utils';
+import { sanitizeForQRCode } from '../utils/sanitize';
 
 export const useQrCode = (initialValue = 'https://generator.app', isDark) => {
   const [inputText, setInputText] = useState('');
   const [qrSvg, setQrSvg] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [errorCorrectionLevel, setErrorCorrectionLevel] = useState('M');
+  const [capacityInfo, setCapacityInfo] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
   const debouncedInputText = useDebounce(inputText, 300);
   const workerRef = useRef(null);
 
   useEffect(() => {
-    // Initialize the worker
-    workerRef.current = new Worker(new URL('./qr.worker.js', import.meta.url));
+    workerRef.current = new Worker(new URL('../workers/qr.worker.js', import.meta.url));
 
     const onMessage = (e) => {
+      if (e.data.capacityInfo) {
+        setCapacityInfo(e.data.capacityInfo);
+      }
       if (e.data.error) {
         console.error('QR Worker Error:', e.data.error);
-        setQrSvg(null); // Set to null or some error indicator
+        setQrSvg(null);
+        setErrorMessage(e.data.error);
       } else {
         setQrSvg(e.data.svgString);
+        setErrorMessage('');
       }
       setIsLoading(false);
     };
 
     workerRef.current.addEventListener('message', onMessage);
 
-    // Cleanup
     return () => {
       workerRef.current.terminate();
     };
@@ -40,18 +46,28 @@ export const useQrCode = (initialValue = 'https://generator.app', isDark) => {
         type: 'svg',
         width: 256,
         margin: 1,
+        errorCorrectionLevel,
         color: {
-          dark: isDark ? '#FFFFFF' : '#000000',
-          light: isDark ? '#10141E' : '#FFFFFF',
+          dark: isDark ? '#e8e8e8' : '#111111',
+          light: isDark ? '#141414' : '#ffffff',
         },
       },
     });
-  }, [debouncedInputText, initialValue, isDark]);
+  }, [debouncedInputText, initialValue, isDark, errorCorrectionLevel]);
+
+  const handleInputChange = useCallback((value) => {
+    setInputText(value);
+    setErrorMessage('');
+  }, []);
 
   return {
     inputText,
-    setInputText,
+    setInputText: handleInputChange,
     qrSvg,
     isLoading,
+    errorCorrectionLevel,
+    setErrorCorrectionLevel,
+    capacityInfo,
+    errorMessage,
   };
 };
