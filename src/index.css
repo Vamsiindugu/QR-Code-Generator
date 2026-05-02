@@ -1,46 +1,105 @@
-/* src/index.css */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Smooth scroll behavior with better performance */
 html {
   scroll-behavior: smooth;
-  /* Prevent white flashes during scroll */
-  background-color: #ffffff;
+  background-color: #fafafa;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Dark mode background fix */
 html.dark {
-  background-color: #010409; /* dark-mode-bg */
+  background-color: #0a0a0a;
 }
 
-/* Ensure body has no gaps */
 body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-x: hidden;
   background-color: inherit;
 }
 
-/* Smooth transitions for all color changes */
-* {
-  transition-property: background-color, border-color, color, fill, stroke;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms;
+::selection {
+  background-color: rgba(224, 32, 32, 0.15);
+  color: inherit;
 }
 
-/* Remove transition from animations to prevent conflicts */
-[class*="motion-"] {
-  transition: none;
+.dark ::selection {
+  background-color: rgba(224, 32, 32, 0.25);
 }
 
-/* Improve scroll performance */
-@media (prefers-reduced-motion: no-preference) {
-  :root {
-    scroll-behavior: smooth;
+textarea,
+input,
+select {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+textarea:focus,
+input:focus,
+select:focus {
+  outline: none;
+}
+
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  opacity: 0;
+  animation: fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes qr-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-qr-in {
+  animation: qr-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes spin-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 1.2s linear infinite;
+}
+
+@keyframes copy-flash {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.copy-flash {
+  animation: copy-flash 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
