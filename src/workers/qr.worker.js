@@ -37,9 +37,12 @@ self.onmessage = (e) => {
 
   if (byteLength > maxCapacity) {
     const bestFit = findBestECLevel(byteLength);
-    if (bestFit && EC_ORDER.indexOf(bestFit) < EC_ORDER.indexOf(requestedEC)) {
+    if (bestFit !== null && EC_ORDER.indexOf(bestFit) < EC_ORDER.indexOf(requestedEC)) {
       effectiveEC = bestFit;
       autoDowngraded = true;
+    } else if (bestFit === null) {
+      // text exceeds even the lowest EC level (L) — use L for accurate capacity messaging
+      effectiveEC = 'L';
     }
   }
 

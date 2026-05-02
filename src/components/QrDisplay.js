@@ -10,7 +10,7 @@ const ALLOWED_ATTRS = new Set([
   'stroke-width', 'x', 'y', 'cx', 'cy', 'r', 'rx', 'ry',
   'transform', 'id', 'offset', 'stop-color', 'stop-opacity',
   'points', 'x1', 'y1', 'x2', 'y2', 'gradientunits',
-  'color',
+  'color', 'shape-rendering',
 ]);
 
 function sanitizeSvg(svgString) {

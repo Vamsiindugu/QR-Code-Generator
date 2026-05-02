@@ -8,6 +8,7 @@ const Button = ({
   type = 'button',
   disabled = false,
   feedback = false,
+  feedbackLabel = 'Copied',
 }) => {
   const [feedbackActive, setFeedbackActive] = useState(false);
 
@@ -44,7 +45,7 @@ const Button = ({
         feedbackActive ? 'ring-2 ring-accent/30 ring-offset-1' : ''
       } ${className}`}
     >
-      {feedbackActive ? 'Copied' : children}
+      {feedbackActive ? feedbackLabel : children}
     </button>
   );
 };

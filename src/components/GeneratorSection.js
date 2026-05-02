@@ -90,6 +90,7 @@ const GeneratorSection = () => {
                 <CapacityBar capacityInfo={capacityInfo} />
                 <div className="flex items-center justify-between text-xs">
                   <span
+                    id="capacity-info"
                     className={
                       isOverCapacity
                         ? 'text-accent font-medium'
@@ -188,6 +189,7 @@ const GeneratorSection = () => {
                   onClick={() => handleShare(qrRef)}
                   variant="primary"
                   feedback
+                  feedbackLabel="Shared"
                   className="flex-1"
                 >
                   Share

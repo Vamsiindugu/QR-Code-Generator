@@ -2,7 +2,6 @@
 
 ![React Version](https://img.shields.io/badge/React-18.3.1-blue.svg)
 ![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-3.4.18-06B6D4.svg)
-![Framer Motion](https://img.shields.io/badge/Framer%20Motion-11.18.2-FF0055.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
 A modern, lightning-fast **QR Code Generator** built with React that transforms any text, URL, or data into beautiful, scannable QR codes instantly. Features **configurable error correction**, **real-time capacity monitoring**, and **multiple export formats**.
@@ -17,11 +16,11 @@ A modern, lightning-fast **QR Code Generator** built with React that transforms 
 | **Error Correction Selector** | Choose L/M/Q/H to balance capacity vs resilience |
 | **Capacity Indicator** | Live byte counter showing how close you are to the QR limit |
 | **Dark/Light Themes** | Automatically adapts to system preferences with manual toggle |
-| **Download as PNG** | Export 1024x1024 high-quality PNG with rounded corners and padding |
+| **Download as PNG** | Export 1024x1024 high-quality PNG with padding |
 | **Download as SVG** | Vector export for print-quality QR codes at any scale |
 | **Copy to Clipboard** | Copy QR code as SVG or PNG image directly |
 | **Web Share API** | Share QR codes natively on mobile devices |
-| **Input Sanitization** | Strips dangerous protocols and HTML tags; SVG output sanitized against XSS |
+| **Input Sanitization** | Strips dangerous protocols (javascript:, data:, vbscript:); SVG output sanitized against XSS |
 | **Lazy Loading** | Generator section loads on-demand for faster initial page load |
 | **Responsive Design** | Optimized for mobile, tablet, and desktop viewports |
 | **Web Worker** | QR generation runs off the main thread for smooth UI |
@@ -69,10 +68,10 @@ QR generation runs in a dedicated Web Worker to keep the UI responsive. The work
 
 | Error Correction | Max Bytes | Use Case |
 |-----------------|-----------|----------|
-| L (7%) | 4,296 | Maximum text capacity |
-| M (15%) | 3,391 | Balanced (default) |
-| Q (25%) | 2,420 | Good damage resilience |
-| H (30%) | 1,852 | Maximum resilience |
+| L (7%) | 2,953 | Maximum text capacity |
+| M (15%) | 2,331 | Balanced (default) |
+| Q (25%) | 1,663 | Good damage resilience |
+| H (30%) | 1,273 | Maximum resilience |
 
 Note: These are byte limits. Multi-byte Unicode characters (emojis, CJK) consume more bytes per character.
 
@@ -85,8 +84,6 @@ Note: These are byte limits. Multi-byte Unicode characters (emojis, CJK) consume
 | **React** | 18.3.1 | UI framework with Hooks and Context API |
 | **qrcode** | 1.5.4 | Server-side QR code generation (runs in Web Worker) |
 | **Tailwind CSS** | 3.4.18 | Utility-first CSS with dark mode support |
-| **Framer Motion** | 11.18.2 | Declarative animations and transitions |
-| **Lucide React** | 0.545.0 | Modern, tree-shakable icon library |
 
 ---
 
